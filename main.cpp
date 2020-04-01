@@ -24,7 +24,7 @@ int main()
     while(1){
         for(float i = 0; i < 1; i += 0.1){
             while(n < 10){
-              Out = 1;
+              Out = 0.6;
               wait(high);
               Out = 0;
               wait(low);
@@ -34,7 +34,7 @@ int main()
         }
         for(float j = 1; j >= 0; j -= 0.1){
             while(n < 10){
-              Out = 1;
+              Out = 0.6;
               wait(high);
               Out = 0;
               wait(low);
@@ -42,13 +42,14 @@ int main()
             high -= 0.0001;
             low += 0.0001;
         }
+        for (int k = 0; k < sample; k++){
+          data[k] = Out;
+          wait(0.001/sample);
+        }
+        for (int m = 0; m < sample; m++){
+          pc.printf("%1.3f\r\n", data[m]);
+          wait(0.1);
+        }
     }
-    for (int k = 0; k < sample; k++){
-      data[k] = Out;
-      wait(0.001/sample);
-    }
-    for (int m = 0; m < sample; m++){
-      pc.printf("%1.3f\r\n", data[m]);
-      wait(0.1);
-    }
+    
 }
